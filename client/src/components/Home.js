@@ -10,8 +10,8 @@ class Home extends React.Component {
     return this.state.books.map(book => {
       return (
         <Table.Row>
-          <Table.Cell>{book.title}</Table.Cell>
           <Table.Cell>{book.name}</Table.Cell>
+          <Table.Cell>{book.title}</Table.Cell>
           <Table.Cell>{book.formatted_date}</Table.Cell>
         </Table.Row>
       )
@@ -43,8 +43,8 @@ class Home extends React.Component {
         <Table celled>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell>Book Title</Table.HeaderCell>
               <Table.HeaderCell>Customer Name</Table.HeaderCell>
+              <Table.HeaderCell>Book Title</Table.HeaderCell>
               <Table.HeaderCell>Purchase Date</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
