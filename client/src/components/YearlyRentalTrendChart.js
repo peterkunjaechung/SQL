@@ -24,7 +24,7 @@ const YearlyRentalTrendChart = () => {
       <XAxis angle={-60} textAnchor='end' dataKey="rental_date" type='category' />
       <YAxis dataKey="rental_count" type='number' />
       <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-      <Scatter name="A school" data={dates} fill="#0066cc" />
+      <Scatter line data={dates} fill="#0066cc" />
     </ScatterChart>
   )
 }
