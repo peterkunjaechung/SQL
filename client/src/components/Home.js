@@ -1,9 +1,10 @@
 import React from 'react'
-import { Table, } from 'semantic-ui-react'
-import axios from 'axios';
+import { Table, Button, } from 'semantic-ui-react'
+import axios from 'axios'
+import Search from './Search'
 
 class Home extends React.Component {
-  state = { books: [], name: '', }
+  state = { books: [], column: 'customers.name' }
 
   listBooks = () => {
     return this.state.books.map(book => {
@@ -17,18 +18,28 @@ class Home extends React.Component {
     })
   }
 
-  searchName = () => {
-    axios.get(`/api/logs?search=${this.state.name}`)
+  searchName = (e, search) => {
+    e.preventDefault()
+
+    axios.get(`/api/logs?column=${this.state.column}&search=${search}`)
       .then(res => {
         this.setState({ books: res.data })
       })
   }
 
+  handleChange = (name) => {
+    this.setState({ column: name })
+  }
+
   render() {
     return (
-      <form style={{ margin: '40px' }}>
-        <input onChange={(e) => this.setState({ name: e.target.value })} />
-        <button onClick={this.searchName}>Search</button>
+      <div style={{ margin: '20px 40px' }}>
+        <Button.Group style={{ margin: '20px 0' }}>
+          <Button color={this.state.column === 'customers.name' ? 'blue' : 'grey'} onClick={() => this.handleChange('customers.name')}>Customer</Button>
+          <Button.Or />
+          <Button color={this.state.column === 'books.title' ? 'blue' : 'grey'} onClick={() => this.handleChange('books.title')}>Book</Button>
+        </Button.Group>
+        <Search searchName={this.searchName} />
         <Table celled>
           <Table.Header>
             <Table.Row>
@@ -41,7 +52,7 @@ class Home extends React.Component {
             {this.listBooks()}
           </Table.Body>
         </Table>
-      </form>
+      </div>
     )
   }
 }
